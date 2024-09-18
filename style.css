@@ -38,7 +38,7 @@ a {
 
 /* main container area beneath menu */
 main {
-  background: rgb(7, 10, 29);
+  background: rgb(0, 15, 109);
   display: flex;
 }
 .sidebar {
@@ -64,7 +64,7 @@ h3 {
 }
     /* portfolio styles */
     .content h1 {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 #portfolio {
