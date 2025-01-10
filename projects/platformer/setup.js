@@ -97,4 +97,8 @@ var collectableList = {
   kennedi: { image: "images/collectables/kennedi-head.png" },
   max: { image: "images/collectables/max-head.png" },
   steve: { image: "images/collectables/steve-head.png" },
+  atom: {
+    image: "images/collectables/pngtree-atom-icon-png-image_6092415.png",
+  },
+  electricity: { image: "images/collectables/horizontal-blue-lightning-streak-with-electric-energy-on-transparent-background-png.png" },
 };
