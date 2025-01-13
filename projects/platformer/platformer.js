@@ -51,9 +51,9 @@ $(function () {
     // example usage: createCollectable(type, x, y, gravity, bounce)
     createCollectable("atom", 195, 600);
     createCollectable("electricity", 657, 270);
-    createCollectable("database", 835, 150);
-    createCollectable("database", 1100, 685);
-    createCollectable("database", 350, 485);
+    createCollectable("gear", 835, 150);
+    createCollectable("radiation", 1100, 685);
+    createCollectable("tomcat", 350, 485);
     // TODO 3
     // Create cannons
     // You must decide the wall you want the cannon on, the position on the wall, and the time between shots in milliseconds

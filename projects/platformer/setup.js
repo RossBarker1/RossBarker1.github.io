@@ -100,5 +100,14 @@ var collectableList = {
   atom: {
     image: "images/collectables/pngtree-atom-icon-png-image_6092415.png",
   },
-  electricity: { image: "images/collectables/horizontal-blue-lightning-streak-with-electric-energy-on-transparent-background-png.png" },
+  electricity: {
+    image:
+      "images/collectables/horizontal-blue-lightning-streak-with-electric-energy-on-transparent-background-png.png",
+  },
+  gear: {
+    image:
+      "images/collectables/settings_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png",
+  },
+  radiation: { image: "images/collectables/pngimg.com - radiation_PNG99530.png" },
+  tomcat: { image: "images/collectables/Apache_Tomcat_logo.svg.png" },
 };
