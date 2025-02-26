@@ -55,13 +55,21 @@ var init = function (window) {
             for (var i = 0; i < circles.length; i++) {
                 physikz.updatePosition(circles[i]); // updates the postition of the circle for every circle in the array circles 60 times a second
             }
-            // deleted hardcoded function calls to be more effienct and scalable
-            
+            //physikz.updatePosition(circles[0]); // hardcoded function calls replaced with loops to be more efficent and scalable
+            //physikz.updatePosition(circles[1]);
+            //physikz.updatePosition(circles[2]);
+            //physikz.updatePosition(circles[3]);
+            //physikz.updatePosition(circles[4]);
+
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
             for (var i = 0; i < circles.length; i++) {
                 game.checkCirclePosition(circles[i]); // iterates through the array circles and gets the position of every circle to keep them on the screen
             }
-            // deleted hardcoded function calls to be more effienct and scalable
+            //game.checkCirclePosition(circles[0]); 
+            //game.checkCirclePosition(circles[1]); 
+            //game.checkCirclePosition(circles[2]); 
+            //game.checkCirclePosition(circles[3]); 
+            //game.checkCirclePosition(circles[4]); //hardcoded function calls replaced with loop to be more efficent and scalable
 
             // TODO 9 : Iterate over the array
            
