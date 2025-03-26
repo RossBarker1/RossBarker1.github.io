@@ -18,8 +18,72 @@ var runLevels = function (window) {
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
+    function createObstacles(x, y, hitSize, damage) {
+      var hitZoneSize = hitSize; // define the size of the hitzone and assign it to a variable
+      var damageFromObstacle = damage; // defines the amount of damage obsticle causes and assigns it to a variable
+      var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); // creates the obstacle hitzone using the size and damage as parameters and assigns it to a variable
+      obstacleHitZone.x = x; // sets the x cordinate of the obstacle
+      obstacleHitZone.y = y; // sets the y cordinate of the obstacle
+      game.addGameItem(obstacleHitZone); // adds the obstacle hitzone to the game 
+      var obstacleImage = draw.bitmap("img/sawblade.png"); // draw the image bitmap and store it in obstacleImage
+      obstacleHitZone.addChild(obstacleImage); // attaches the image to the obstacle hitzone
+      obstacleImage.x = -25; // position the image on the hitzone's x value by moving it 25 pixels left
+      obstacleImage.y = -25; // position the image on the hitzone's x value by moving it 25 pixels up
+      obstacleHitZone.rotationalVelocity = 50; // makes the sawblade spin
 
-    
+    }
+    createObstacles(400, groundY - 50, 15, 10);
+    createObstacles(500, groundY - 50, 15, 25);
+    createObstacles(600, groundY - 50, 15, 15);
+
+
+    function createEnemy(x, y, speed) {
+      var enemy = game.createGameItem("enemy", 25); // creates enemy game itema dn adds it to game
+      var redSquare = draw.rect(50, 50, "red"); //  creates a red square and stores it in the variable redSquare
+      redSquare.x = -25; // offsets the image from the hitzone by -25 pixels
+      redSquare.y = -25; // offsets the image from the hitzone by -25 pixels
+      enemy.addChild(redSquare); // add the red square as a child to our enemy variable
+      enemy.x = x; // x position of enemy
+      enemy.y = y; // y position of enemy
+      game.addGameItem(enemy); // add enemy to the game
+      enemy.velocityX -= speed; // controlling how fast the enemy moves on the x axis
+      enemy.rotationalVelocity = 2; // makes the enemy spin
+  
+      enemy.onPlayerCollision = function () {
+        game.changeIntegrity(-10); // makes the enemy take away 10 health from Hallebot
+        
+      };
+      enemy.onProjectileCollision = function() {
+        game.increaseScore(100); // increases your score when Halle shoots the enemy
+        enemy.fadeOut(); // enemy fades out when halle shoots enemy
+        //enemy.shrink();
+        //enemy.flyTo(x,y);
+      }
+    }
+    for(var i = 0; i < 10; i++) {
+      createEnemy(400 + 200*i, groundY - 50, i*2);
+    }
+
+    function createReward(x, y, speed) {
+      var reward = game.createGameItem("reward", 25); // creates reward game itema dn adds it to game
+      var blueSquare = draw.rect(50, 50, "blue"); //  creates a red square and stores it in the variable redSquare
+      blueSquare.x = -25; // offsets the image from the hitzone by -25 pixels
+      blueSquare.y = -25; // offsets the image from the hitzone by -25 pixels
+      reward.addChild(blueSquare); // add the red square as a child to our reward variable
+      reward.x = x; // x position of reward
+      reward.y = y; // y position of reward
+      game.addGameItem(reward); // add reward to the game
+      reward.velocityX -= speed; // controlling how fast the reward moves on the x axis
+      reward.rotationalVelocity = 2; // makes the reward spin
+  
+      reward.onPlayerCollision = function () {
+        game.changeIntegrity(10); // makes the reward take away 10 health from Hallebot
+
+      };
+
+    }
+    createReward(1000, groundY-50, 3);
+
 
     function startLevel() {
       // TODO 13 goes below here

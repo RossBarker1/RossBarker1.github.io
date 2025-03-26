@@ -29,7 +29,8 @@ var background = function (window) {
         // ANIMATION VARIABLES HERE //////////////////////////////////////
         //////////////////////////////////////////////////////////////////
         // TODO (several):
-      
+      var tree;
+      var buildings = [];
       
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -39,7 +40,7 @@ var background = function (window) {
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,groundY,'white');
+            var backgroundFill = draw.rect(canvasWidth,groundY,'gray');
             background.addChild(backgroundFill);
             
             // TODO 2: - Add a moon and starfield
@@ -49,12 +50,29 @@ var background = function (window) {
             moon.scaleX = 0.5; // scales the moon's width
             moon.scaleY = 0.5; // scales the moon's height
             background.addChild(moon); // add the moon to the background container
-                        
-            // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             
+            for (var i = 0; i < 3000; i++) {
+                var circle = draw.circle(1, "white", "LightGray", 2); // create a circle with a specified radius, border color, fill color, and alpha
+                circle.x = canvasWidth * Math.random(); // set random x position within canvas width
+                circle.y = groundY * Math.random(); // set random y position within groundY range 
+                background.addChild(circle); // adds the star to the background container
+            }
+            // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
+            for (var i = 0; i < 10; i++) {
+                var buildingColors = ["red", "blue", "yellow", "orange", "purple"]
+                var buildingHeight = 300 * Math.random(); // assign 300 to the building height variable
+                var building = draw.rect(75, buildingHeight, buildingColors[i], "Black", 1); // draws a rectangle with 75 width, buildingHeight as the height, light grey is the fill color, black is the outline, 1 is the outline width
+                building.x = 200 * i; // multipy 200 by the current i value and store it as the x position for the building
+                building.y = groundY - buildingHeight; // takes the groundY, subtracts the buildingHeight 
+                background.addChild(building); // add our building to the background container
+                buildings.push(building); // add the building to the buldings array for further manipulation.
+              }
             
             // TODO 3: Part 1 - Add a tree
-            
+            tree = draw.bitmap("img/tree.png"); // creates a bitmap for the tree image and store it in the variable tree
+            tree.x = canvasWidth-300; // place the tree on the screen on the right
+            tree.y = groundY-250; // place the tree above the group (adjusted for tree height)
+            background.addChild(tree); // add the tree to the background container
             
         } // end of render function - DO NOT DELETE
         
@@ -68,10 +86,19 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 3: Part 2 - Move the tree!
-            
-            
+            tree.x -= 3; // moves the tree to the left by subtracting 3 from its current x position
+            if (tree.x < -200) {
+                tree.x = canvasWidth; // moves the tree back to the right if it has gone off the screen
+              }
             // TODO 4: Part 2 - Parallax
-            
+            for (var i = 0; i < buildings.length; i++) {
+                var building = buildings[i]; // the individual index of the buildings array stored in a variable
+                building.x -= 1; // subtracts 1 from the building's x postioion; animate to the left
+                if (building.x < -100) { // Checks if the x position of the building is less than -100
+                    building.x = canvasWidth; // if true, reset building's x position to the right side of the canvas
+                }
+
+            }
 
         } // end of update function - DO NOT DELETE
         
