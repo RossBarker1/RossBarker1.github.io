@@ -64,9 +64,9 @@ var runLevels = function (window) {
     //  createEnemy(400 + 200*i, groundY - 50, i*2);
     //}
 
-    createEnemy(800, groundY-50, 3);
-    createEnemy(1000, groundY-50, 6);
-    createEnemy(1200, groundY-50, 9);
+    //createEnemy(800, groundY-50, 3);
+    //createEnemy(1000, groundY-50, 6);
+    //createEnemy(1200, groundY-50, 9);
 
     function createReward(x, y, speed) {
       var reward = game.createGameItem("reward", 25); // creates reward game itema dn adds it to game
@@ -86,7 +86,7 @@ var runLevels = function (window) {
       };
 
     }
-    createReward(1000, groundY-50, 3);
+    //createReward(1000, groundY-50, 3);
 
     function createLevel(x, y, speed) {
       var reward = game.createGameItem("level", 25); // creates reward game itema dn adds it to game
@@ -105,18 +105,27 @@ var runLevels = function (window) {
         startLevel();
       };
     }
-      createLevel(1500, groundY-50, 2);
+    //createLevel(1500, groundY-50, 2);
 
 
     function startLevel() {
       // TODO 13 goes below here
-      var level = levelData[levelData]; // fetches the currenLevel from the levelData array and stores it in var level
+      var level = levelData[currentLevel]; // fetches the currenLevel from the levelData array and stores it in var level
       var levelObjects = level.gameItems // retrive the array of gameItems and stores it in levelObjects
 
       for(var i = 0; i < levelObjects.length; i++) {
         var element = levelObjects[i];
-        if(element.type === "sawblade") {
-          createObstacles(element.x, element.y, element.hitSize, element.damage);
+        if(element.type === "sawblade") { // checks the type key:value of the gameItems to determine which objects to manifest
+          createObstacles(element.x, element.y, element.hitSize, element.damage); // if the condition is true, it will call the relevant function. 
+        }
+        if(element.type === "enemy") { // checks the type key:value of the gameItems to determine which objects to manifest
+          createEnemy(element.x, element.y, element.speed); // if the condition is true, it will call the relevant function. 
+        }
+        if(element.type === "reward") { // checks the type key:value of the gameItems to determine which objects to manifest
+          createReward(element.x, element.y, element.speed); // if the condition is true, it will call the relevant function. 
+        }
+        if(element.type === "level") { // checks the type key:value of the gameItems to determine which objects to manifest
+          createLevel(element.x, element.y, element.speed); // if the condition is true, it will call the relevant function. 
         }
       }
 

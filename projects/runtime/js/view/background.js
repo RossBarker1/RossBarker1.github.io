@@ -31,6 +31,7 @@ var background = function (window) {
         // TODO (several):
       var tree;
       var buildings = [];
+      var circles = [];
       
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -40,7 +41,7 @@ var background = function (window) {
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,groundY,'gray');
+            var backgroundFill = draw.rect(canvasWidth,groundY,'lightgray');
             background.addChild(backgroundFill);
             
             // TODO 2: - Add a moon and starfield
@@ -51,13 +52,16 @@ var background = function (window) {
             moon.scaleY = 0.5; // scales the moon's height
             background.addChild(moon); // add the moon to the background container
             
+            var circles = []; // creates an array for all circles
             for (var i = 0; i < 3000; i++) {
-                var circle = draw.circle(1, "white", "LightGray", 2); // create a circle with a specified radius, border color, fill color, and alpha
+                var circle = draw.circle(1, "white", "white", 2); // create a circle with a specified radius, border color, fill color, and alpha
                 circle.x = canvasWidth * Math.random(); // set random x position within canvas width
                 circle.y = groundY * Math.random(); // set random y position within groundY range 
                 background.addChild(circle); // adds the star to the background container
+                circles[i] = circle; // adds all circles to the circles array\
+                console.log(circle);
             }
-            // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
+            // TODO 4: Part 1 - Add buildings!
             for (var i = 0; i < 10; i++) {
                 var buildingColors = ["red", "blue", "yellow", "orange", "purple"]
                 var buildingHeight = 300 * Math.random(); // assign 300 to the building height variable
@@ -84,6 +88,11 @@ var background = function (window) {
             var canvasWidth = app.canvas.width;
             var canvasHeight = app.canvas.height;
             var groundY = ground.y;
+            
+            for (var i = 0; i < circles.length; i++) {
+                circles[i].y -= 5;
+            }
+
             
             // TODO 3: Part 2 - Move the tree!
             tree.x -= 3; // moves the tree to the left by subtracting 3 from its current x position
