@@ -32,6 +32,7 @@ var background = function (window) {
       var tree;
       var buildings = [];
       var circles = [];
+      var circleSpeed = [];
       
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -52,25 +53,28 @@ var background = function (window) {
             moon.scaleY = 0.5; // scales the moon's height
             background.addChild(moon); // add the moon to the background container
             
-            var circles = []; // creates an array for all circles
-            for (var i = 0; i < 3000; i++) {
+            for (var i = 0; i < 4000; i++) {
                 var circle = draw.circle(1, "white", "white", 2); // create a circle with a specified radius, border color, fill color, and alpha
                 circle.x = canvasWidth * Math.random(); // set random x position within canvas width
                 circle.y = groundY * Math.random(); // set random y position within groundY range 
                 background.addChild(circle); // adds the star to the background container
                 circles[i] = circle; // adds all circles to the circles array\
-                console.log(circle);
+                circleSpeed[i] = (Math.random()*0.1) + 0.5;
+
             }
             // TODO 4: Part 1 - Add buildings!
+            // for (var i = 0; i < 10; i++) {
+            //     var buildingColors = ["red", "blue", "yellow", "orange", "purple"]
+            //     var buildingHeight = 300 * Math.random(); // assign 300 to the building height variable
+            //     var building = draw.rect(75, buildingHeight, buildingColors[i], "Black", 1); // draws a rectangle with 75 width, buildingHeight as the height, light grey is the fill color, black is the outline, 1 is the outline width
+            //     building.x = 200 * i; // multipy 200 by the current i value and store it as the x position for the building
+            //     building.y = groundY - buildingHeight; // takes the groundY, subtracts the buildingHeight 
+            //     background.addChild(building); // add our building to the background container
+            //     buildings.push(building); // add the building to the buldings array for further manipulation.
+            //   }
             for (var i = 0; i < 10; i++) {
-                var buildingColors = ["red", "blue", "yellow", "orange", "purple"]
-                var buildingHeight = 300 * Math.random(); // assign 300 to the building height variable
-                var building = draw.rect(75, buildingHeight, buildingColors[i], "Black", 1); // draws a rectangle with 75 width, buildingHeight as the height, light grey is the fill color, black is the outline, 1 is the outline width
-                building.x = 200 * i; // multipy 200 by the current i value and store it as the x position for the building
-                building.y = groundY - buildingHeight; // takes the groundY, subtracts the buildingHeight 
-                background.addChild(building); // add our building to the background container
-                buildings.push(building); // add the building to the buldings array for further manipulation.
-              }
+                var mountain = draw.bitmap("img/")
+            }
             
             // TODO 3: Part 1 - Add a tree
             tree = draw.bitmap("img/tree.png"); // creates a bitmap for the tree image and store it in the variable tree
@@ -90,7 +94,16 @@ var background = function (window) {
             var groundY = ground.y;
             
             for (var i = 0; i < circles.length; i++) {
-                circles[i].y -= 5;
+                var circle = circles[i];
+                circle.y += circleSpeed[i]
+                circle.x -= (circleSpeed[i]/4)
+            
+                if(circle.y > groundY+20) {
+                    circle.y = -4;
+                }
+                if(circle.x < -4) {
+                    circle.x = canvasWidth + 4;
+                }
             }
 
             
