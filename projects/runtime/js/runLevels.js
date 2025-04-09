@@ -82,14 +82,14 @@ var runLevels = function (window) {
   
       reward.onPlayerCollision = function () {
         game.changeIntegrity(10); // makes the reward take away 10 health from Hallebot
-
+        reward.shrink();
       };
 
     }
     //createReward(1000, groundY-50, 3);
 
     function createLevel(x, y, speed) {
-      var reward = game.createGameItem("level", 25); // creates reward game itema dn adds it to game
+      var reward = game.createGameItem("level", 25); // creates reward game item and adds it to game
       var yellowSquare = draw.rect(50, 50, "yellow"); //  creates a red square and stores it in the variable redSquare
       yellowSquare.x = -25; // offsets the image from the hitzone by -25 pixels
       yellowSquare.y = -25; // offsets the image from the hitzone by -25 pixels
