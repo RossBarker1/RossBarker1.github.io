@@ -68,17 +68,18 @@ var runLevels = function (window) {
     //createEnemy(1000, groundY-50, 6);
     //createEnemy(1200, groundY-50, 9);
 
-    function createReward(x, y, speed) {
+    function createReward(x, y, speed, image, scale) {
       var reward = game.createGameItem("reward", 25); // creates reward game itema dn adds it to game
-      var blueSquare = draw.rect(50, 50, "blue"); //  creates a red square and stores it in the variable redSquare
-      blueSquare.x = -25; // offsets the image from the hitzone by -25 pixels
-      blueSquare.y = -25; // offsets the image from the hitzone by -25 pixels
-      reward.addChild(blueSquare); // add the red square as a child to our reward variable
+      var rewardImage = draw.bitmap(`img/${image}.png`); //  creates a red square and stores it in the variable redSquare
+      rewardImage.scaleX = scale;
+      rewardImage.scaleY = scale;
+      rewardImage.x = -42; // offsets the image from the hitzone by -25 pixels
+      rewardImage.y = -42; // offsets the image from the hitzone by -25 pixels
+      reward.addChild(rewardImage); // add the red square as a child to our reward variable
       reward.x = x; // x position of reward
       reward.y = y; // y position of reward
       game.addGameItem(reward); // add reward to the game
       reward.velocityX -= speed; // controlling how fast the reward moves on the x axis
-      reward.rotationalVelocity = 2; // makes the reward spin
   
       reward.onPlayerCollision = function () {
         game.changeIntegrity(10); // makes the reward take away 10 health from Hallebot
@@ -88,12 +89,14 @@ var runLevels = function (window) {
     }
     //createReward(1000, groundY-50, 3);
 
-    function createLevel(x, y, speed) {
+    function createLevel(x, y, speed, image, scale) {
       var reward = game.createGameItem("level", 25); // creates reward game item and adds it to game
-      var yellowSquare = draw.rect(50, 50, "yellow"); //  creates a red square and stores it in the variable redSquare
-      yellowSquare.x = -25; // offsets the image from the hitzone by -25 pixels
-      yellowSquare.y = -25; // offsets the image from the hitzone by -25 pixels
-      reward.addChild(yellowSquare); // add the red square as a child to our reward variable
+      var levelImage = draw.bitmap(`img/${image}.png`); // draws an image from the image provided by the user
+      levelImage.x = -25; // offsets the image from the hitzone by -25 pixels
+      levelImage.y = -25; // offsets the image from the hitzone by -25 pixels
+      levelImage.scaleX = scale;
+      levelImage.scaleY = scale;
+      reward.addChild(levelImage); // add the image as a child to our reward variable
       reward.x = x; // x position of reward
       reward.y = y; // y position of reward
       game.addGameItem(reward); // add reward to the game
@@ -122,10 +125,10 @@ var runLevels = function (window) {
           createEnemy(element.x, element.y, element.speed); // if the condition is true, it will call the relevant function. 
         }
         if(element.type === "reward") { // checks the type key:value of the gameItems to determine which objects to manifest
-          createReward(element.x, element.y, element.speed); // if the condition is true, it will call the relevant function. 
+          createReward(element.x, element.y, element.speed, element.image, element.scale); // if the condition is true, it will call the relevant function. 
         }
         if(element.type === "level") { // checks the type key:value of the gameItems to determine which objects to manifest
-          createLevel(element.x, element.y, element.speed); // if the condition is true, it will call the relevant function. 
+          createLevel(element.x, element.y, element.speed, element.image, element.scale); // if the condition is true, it will call the relevant function. 
         }
       }
 

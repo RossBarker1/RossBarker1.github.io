@@ -23,9 +23,9 @@ var makeLevelData = function (window) {
           { type: "enemy", x: 1000, y: groundY - 50, speed: 6 },
           { type: "enemy", x: 1200, y: groundY - 50, speed: 9 },
 
-          { type: "reward", x: 1000, y: groundY - 50, speed: 3 },
+          { type: "reward", x: 1000, y: groundY - 50, speed: 3, image: "snowball", scale: 0.25 },
           
-          { type: "level", x: 1500, y: groundY - 50, speed: 2 },
+          { type: "level", x: 1500, y: groundY - 50, speed: 2, image: "snowflake", scale: 0.05 },
         ],
       },
       {
