@@ -37,12 +37,14 @@ var runLevels = function (window) {
     //createObstacles(900, groundY - 50, 25, 60);
 
 
-    function createEnemy(x, y, speed) {
+    function createEnemy(x, y, speed, damage, image, scale) {
       var enemy = game.createGameItem("enemy", 25); // creates enemy game itema dn adds it to game
-      var redSquare = draw.rect(50, 50, "red"); //  creates a red square and stores it in the variable redSquare
-      redSquare.x = -25; // offsets the image from the hitzone by -25 pixels
-      redSquare.y = -25; // offsets the image from the hitzone by -25 pixels
-      enemy.addChild(redSquare); // add the red square as a child to our enemy variable
+      var enemyImage = draw.bitmap(`img/${image}.png`) //  creates a red square and stores it in the variable redSquare
+      enemyImage.x = -25; // offsets the image from the hitzone by -25 pixels
+      enemyImage.y = -25; // offsets the image from the hitzone by -25 pixels
+      enemyImage.scaleX = scale;
+      enemyImage.scaleY = scale;
+      enemy.addChild(enemyImage); // add the red square as a child to our enemy variable
       enemy.x = x; // x position of enemy
       enemy.y = y; // y position of enemy
       game.addGameItem(enemy); // add enemy to the game
@@ -50,7 +52,7 @@ var runLevels = function (window) {
       enemy.rotationalVelocity = 2; // makes the enemy spin
   
       enemy.onPlayerCollision = function () {
-        game.changeIntegrity(-10); // makes the enemy take away 10 health from Hallebot
+        game.changeIntegrity(-damage); // makes the enemy take away 10 health from Hallebot
         
       };
       enemy.onProjectileCollision = function() {
@@ -122,7 +124,7 @@ var runLevels = function (window) {
           createObstacles(element.x, element.y, element.hitSize, element.damage); // if the condition is true, it will call the relevant function. 
         }
         if(element.type === "enemy") { // checks the type key:value of the gameItems to determine which objects to manifest
-          createEnemy(element.x, element.y, element.speed); // if the condition is true, it will call the relevant function. 
+          createEnemy(element.x, element.y, element.speed, element.damage, element.image, element.scale); // if the condition is true, it will call the relevant function. 
         }
         if(element.type === "reward") { // checks the type key:value of the gameItems to determine which objects to manifest
           createReward(element.x, element.y, element.speed, element.image, element.scale); // if the condition is true, it will call the relevant function. 
