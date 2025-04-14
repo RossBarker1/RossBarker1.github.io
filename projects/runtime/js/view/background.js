@@ -29,14 +29,14 @@ var background = function (window) {
     // ANIMATION VARIABLES HERE //////////////////////////////////////
     //////////////////////////////////////////////////////////////////
     // TODO (several):
-    var tree;
-    var mountain;
-    var mountain_2;
-    var penguins = [];
-    var penguinSpeed = [];
+    //var tree;
+    var mountain; // variable to hold the mountain image
+    var mountain_2; // variable to hold the mountain image
+    var penguins = []; // array to hold the penguin images
+    var penguinSpeed = []; // array to hold the penguin speed
     //var buildings = [];
-    var circles = [];
-    var circleSpeed = [];
+    var circles = []; // array to hold the circles
+    var circleSpeed = []; // array to hold the circles speed
 
     // called at the start of game and whenever the page is resized
     // add objects for display in background. draws each image added to the background once
@@ -46,8 +46,8 @@ var background = function (window) {
       // TODO 1:
       // this currently fills the background with an obnoxious yellow;
       // you should modify both the height and color to suit your game
-      var backgroundFill = draw.rect(canvasWidth, groundY, "lightgray");
-      background.addChild(backgroundFill);
+      var backgroundFill = draw.rect(canvasWidth, groundY, "lightgray"); // creates a rectangle with the canvas width and height of the ground and sets the color to lightgray
+      background.addChild(backgroundFill); // adds the backgroundFill to the background container
 
       // TODO 2: - Add a moon and starfield
       var moon = draw.bitmap("img/moon.png"); // creats a bitmap object using the moon image and stores it in the moon variable
@@ -57,29 +57,29 @@ var background = function (window) {
       moon.scaleY = 0.5; // scales the moon's height
       background.addChild(moon); // add the moon to the background container
 
-      mountain = draw.bitmap("img/mountain.png");
-      mountain.x = 0;
-      mountain.y = groundY - 650;
-      mountain.scaleX = 1;
-      mountain.scaleY = 1;
-      background.addChild(mountain);
+      mountain = draw.bitmap("img/mountain.png"); // creates a bitmap object using the mountain image and stores it in the mountain variable
+      mountain.x = 0; // sets the mountain's x position
+      mountain.y = groundY - 650; // sets the mountain's y position
+      mountain.scaleX = 1; // scales the mountain's width
+      mountain.scaleY = 1; // scales the mountain's height
+      background.addChild(mountain); // add the mountain to the background container
 
-      mountain_2 = draw.bitmap("img/mountain_2.png");
-      mountain_2.x = 850;
-      mountain_2.y = groundY - 740;
-      mountain_2.scaleX = 1.25;
-      mountain_2.scaleY = 1.25;
-      background.addChild(mountain_2);
+      mountain_2 = draw.bitmap("img/mountain_2.png"); // creates a bitmap object using the mountain_2 image and stores it in the mountain_2 variable
+      mountain_2.x = 850; // sets the mountain_2's x position
+      mountain_2.y = groundY - 740; // sets the mountain_2's y position
+      mountain_2.scaleX = 1.25; // scales the mountain_2's width
+      mountain_2.scaleY = 1.25; // scales the mountain_2's height
+      background.addChild(mountain_2); // add the mountain_2 to the background container
 
       for(var i = 0; i < 4; i++) {
-        var penguin = draw.bitmap("img/penguin.png");
-        penguin.x = canvasWidth*Math.random();
-        penguin.y = groundY - 75;
-        penguin.scaleX = 0.1;
-        penguin.scaleY = 0.1;
-        background.addChild(penguin);
-        penguinSpeed[i] = Math.random();
-        penguins[i] = penguin;
+        var penguin = draw.bitmap("img/penguin.png"); // creates a bitmap object using the penguin image and stores it in the penguin variable
+        penguin.x = canvasWidth*Math.random(); // sets the penguin's x position
+        penguin.y = groundY - 75; // sets the penguin's y position
+        penguin.scaleX = 0.1; // scales the penguin's width
+        penguin.scaleY = 0.1; // scales the penguin's height
+        background.addChild(penguin); // add the penguin to the background container
+        penguinSpeed[i] = Math.random(); // sets the penguin speed to a random number
+        penguins[i] = penguin; // adds the penguin to the penguins array
       }
 
 
@@ -89,7 +89,7 @@ var background = function (window) {
         circle.y = groundY * Math.random(); // set random y position within groundY range
         background.addChild(circle); // adds the star to the background container
         circles[i] = circle; // adds all circles to the circles array
-        circleSpeed[i] = Math.random() * 0.1 + 0.5;
+        circleSpeed[i] = Math.random() * 0.1 + 0.5; // sets the circle speed to a random number
       }
       // TODO 4: Part 1 - Add buildings!
       // for (var i = 0; i < 10; i++) {
@@ -118,31 +118,31 @@ var background = function (window) {
       var groundY = ground.y;
 
       for (var i = 0; i < circles.length; i++) {
-        var circle = circles[i];
-        circle.y += circleSpeed[i];
-        circle.x -= circleSpeed[i] / 4;
+        var circle = circles[i]; // the variable circle is created and assigned to the current index of the circles array
+        circle.y += circleSpeed[i]; // the y position of the circle is increased by the circle speed
+        circle.x -= circleSpeed[i] / 4; // the x position of the circle is decreased by the circle speed divided by 4
 
         if (circle.y > groundY + 20) {
-          circle.y = -4;
+          circle.y = -4; // if the circle goes off the screen, it is reset to the top
         }
         if (circle.x < -4) {
-          circle.x = canvasWidth + 4;
+          circle.x = canvasWidth + 4; // if the circle goes off the left side of the screen, it is reset to the right
         }
       }
 
-      mountain.x -= 0.25;
+      mountain.x -= 0.25; // moves the mountain to the left by 0.25 pixels
       if (mountain.x < -900) {
-        mountain.x = canvasWidth;
+        mountain.x = canvasWidth; // moves the mountain back to the right if it has gone off the screen
       }
 
-      mountain_2.x -= 0.25;
+      mountain_2.x -= 0.25; // moves the mountain_2 to the left by 0.25 pixels
       if (mountain_2.x < -900) {
-        mountain_2.x = canvasWidth;
+        mountain_2.x = canvasWidth; // moves the mountain_2 back to the right if it has gone off the screen
       }
       for(var i = 0; i < 4; i++) {
-        penguins[i].x -= (0.1 +penguinSpeed[i]);
+        penguins[i].x -= (0.1 +penguinSpeed[i]); // moves the penguin to the left by 0.1 pixels
         if (penguins[i].x < -75) {
-          penguins[i].x = canvasWidth;
+          penguins[i].x = canvasWidth; // moves the penguin back to the right if it has gone off the screen
         }
       }
  
